@@ -1,10 +1,549 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mon site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tanky le Tank - Projet STI2D</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(255, 208, 0, 0.2), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 80, 0, 0.2), transparent 30%),
+        #050505;
+      border-bottom: 1px solid #222;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 50px;
+      margin-bottom: 30px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #00ff66;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      color: #bbb;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 16px 30px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #ffd000;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      background: #ffe44d;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid #555;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: #ffd000;
+      color: #ffd000;
+    }
+
+    .hero-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 40px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 25px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .stat-box {
+      background: #050505;
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-box h3 {
+      color: #ffd000;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .section-title p {
+      color: #999;
+      font-size: 1.1rem;
+    }
+
+    .presentation {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 60px;
+      align-items: center;
+    }
+
+    .presentation img {
+      width: 100%;
+      border-radius: 30px;
+      border: 1px solid #222;
+    }
+
+    .presentation p {
+      color: #bbb;
+      line-height: 1.9;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      padding: 35px;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #ffd000;
+    }
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      background: #ffd000;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+    }
+
+    .card p {
+      color: #999;
+      line-height: 1.7;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .tech-box {
+      background: #111;
+      border-radius: 30px;
+      border: 1px solid #222;
+      padding: 35px;
+    }
+
+    .tech-box h3 {
+      color: #ffd000;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .tech-box p {
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 30px;
+      border: 1px solid #222;
+      transition: 0.4s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .member {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 30px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #ffd000;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: auto;
+      margin-bottom: 25px;
+    }
+
+    footer {
+      border-top: 1px solid #222;
+      padding: 50px 0;
+      text-align: center;
+      color: #777;
+    }
+
+    footer h3 {
+      color: #ffd000;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    @media(max-width: 768px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Projet final 1er STI2D</h1>
+
+<header>
+  <div class="container hero">
+    <div>
+      <div class="badge">
+        <div class="dot"></div>
+        Projet Final STI2D 2026
+      </div>
+
+      <h1>Tanky le Tank</h1>
+
+      <p>
+        Un robot sumo autonome conçu dans le cadre du projet final de première STI2D.
+        Tanky détecte ses adversaires, évite les limites du terrain et pousse automatiquement
+        les autres robots hors du dojo.
+      </p>
+
+      <div class="buttons">
+        <a href="#presentation" class="btn btn-primary">Découvrir le projet</a>
+        <a href="#technologies" class="btn btn-secondary">Technologies</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1200&auto=format&fit=crop" alt="Robot tank">
+
+      <div class="stats">
+        <div class="stat-box">
+          <h3>2</h3>
+          <p>Moteurs</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>4</h3>
+          <p>Capteurs</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>100%</h3>
+          <p>Autonome</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="presentation">
+  <div class="container presentation">
+    <div>
+      <h2>Présentation du projet</h2>
+
+      <p>
+        Le but du projet était de créer un robot sumo capable d'affronter d'autres robots dans une arène circulaire.
+        Le robot devait être autonome, rapide et intelligent afin de détecter ses adversaires et éviter les limites du terrain.
+      </p>
+
+      <p>
+        Nous avons conçu Tanky avec une structure robuste inspirée des chars d'assaut, équipée de chenilles,
+        de capteurs infrarouges et d'une programmation permettant des réactions rapides.
+      </p>
+    </div>
+
+    <div>
+      <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop" alt="Robot autonome">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Objectifs du projet</h2>
+      <p>Les principales fonctionnalités développées pour Tanky.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">D</div>
+        <h3>Détection</h3>
+        <p>Repérer automatiquement les adversaires grâce aux capteurs infrarouges.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">M</div>
+        <h3>Mobilité</h3>
+        <p>Se déplacer rapidement avec des moteurs puissants à chenilles.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">A</div>
+        <h3>Autonomie</h3>
+        <p>Fonctionner sans intervention humaine pendant les combats.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">S</div>
+        <h3>Sécurité</h3>
+        <p>Éviter les bordures blanches du dojo pour ne pas tomber.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="technologies">
+  <div class="container">
+    <div class="section-title">
+      <h2>Technologies utilisées</h2>
+      <p>Les composants et logiciels utilisés pour la conception de Tanky.</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-box">
+        <h3>Arduino UNO</h3>
+        <p>Carte programmable utilisée pour contrôler le robot et ses composants.</p>
+      </div>
+
+      <div class="tech-box">
+        <h3>Capteurs IR</h3>
+        <p>Détection des bordures du terrain et repérage des obstacles.</p>
+      </div>
+
+      <div class="tech-box">
+        <h3>Moteurs DC</h3>
+        <p>Deux moteurs puissants permettent un déplacement rapide et précis.</p>
+      </div>
+
+      <div class="tech-box">
+        <h3>Impression 3D</h3>
+        <p>Fabrication de certaines pièces mécaniques du châssis.</p>
+      </div>
+
+      <div class="tech-box">
+        <h3>Programmation C++</h3>
+        <p>Développement du comportement autonome du robot.</p>
+      </div>
+
+      <div class="tech-box">
+        <h3>CAO</h3>
+        <p>Conception du robot avec des logiciels de modélisation 3D.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Galerie du projet</h2>
+      <p>Quelques aperçus du développement et du prototype final.</p>
+    </div>
+
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Projet 1">
+
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" alt="Projet 2">
+
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Projet 3">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Équipe du projet</h2>
+      <p>Projet réalisé dans le cadre de la spécialité STI2D.</p>
+    </div>
+
+    <div class="team">
+      <div class="member">
+        <div class="avatar">T</div>
+        <h3>Tanky Team</h3>
+        <p>Chef de projet</p>
+      </div>
+
+      <div class="member">
+        <div class="avatar">T</div>
+        <h3>Tanky Team</h3>
+        <p>Programmation</p>
+      </div>
+
+      <div class="member">
+        <div class="avatar">T</div>
+        <h3>Tanky Team</h3>
+        <p>Conception mécanique</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <h3>Tanky le Tank</h3>
+    <p>Projet Final STI2D 2026</p>
+  </div>
+</footer>
+
 </body>
 </html>

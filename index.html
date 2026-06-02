@@ -3,18 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tanky le Tank — Projet STI2D 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Tanky le Tank — Projet Final STI2D 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --yellow: #FFD000;
   --orange: #FF5500;
+  --green: #00ff66;
+  --blue: #4f8cff;
   --dark: #080808;
   --darker: #030303;
   --card: #0f0f0f;
-  --border: #1e1e1e;
-  --muted: #666;
-  --text: #e0e0e0;
+  --card2: #141414;
+  --border: #242424;
+  --muted: #858585;
+  --text: #e8e8e8;
+  --white: #fff;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
@@ -28,10 +32,10 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.4;
+  opacity: 0.45;
 }
 nav {
   position: fixed;
@@ -40,26 +44,26 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
-  background: rgba(8,8,8,0.85);
+  padding: 18px 60px;
+  background: rgba(8,8,8,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 3px;
+  font-size: 1.9rem;
+  letter-spacing: 4px;
   color: var(--yellow);
 }
-.nav-links { display: flex; gap: 40px; }
+.nav-links { display: flex; gap: 30px; align-items:center; }
 .nav-links a {
   font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--muted);
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: uppercase;
-  transition: color 0.3s;
+  transition: color 0.25s;
 }
 .nav-links a:hover { color: var(--yellow); }
 header {
@@ -74,15 +78,15 @@ header {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,208,0,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(255,85,0,0.06) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,208,0,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(255,85,0,0.08) 0%, transparent 70%);
 }
 .grid-lines {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,208,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,208,0,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255,208,0,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,208,0,0.035) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 .hero-inner {
@@ -109,7 +113,7 @@ header {
 }
 .live-dot {
   width: 8px; height: 8px;
-  background: #00ff66;
+  background: var(--green);
   border-radius: 50%;
   animation: blink 1.4s ease-in-out infinite;
 }
@@ -126,39 +130,30 @@ h1 {
 }
 h1 span { color: var(--yellow); }
 .hero-desc {
-  color: var(--muted);
-  font-size: 1.05rem;
+  color: #aaa;
+  font-size: 1.08rem;
   line-height: 1.85;
-  max-width: 480px;
+  max-width: 560px;
   margin-bottom: 44px;
 }
 .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-y, .btn-o {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
 .btn-y {
   background: var(--yellow);
   color: #000;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 16px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.3s;
 }
 .btn-y:hover { background: #ffe84d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,208,0,0.3); }
-.btn-o {
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 16px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.3s;
-}
+.btn-o { border: 1px solid var(--border); color: var(--text); }
 .btn-o:hover { border-color: var(--yellow); color: var(--yellow); }
 .robot-card {
   background: var(--card);
@@ -167,19 +162,20 @@ h1 span { color: var(--yellow); }
   padding: 24px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
 }
 .robot-card::before {
   content: '';
   position: absolute;
   top: -40px; right: -40px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(255,208,0,0.12), transparent 70%);
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(255,208,0,0.13), transparent 70%);
   border-radius: 50%;
 }
 .robot-screen {
   background: #000;
   border-radius: 12px;
-  height: 260px;
+  height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,22 +192,17 @@ h1 span { color: var(--yellow); }
   pointer-events: none;
   z-index: 2;
 }
-.oled-label {
+.oled-label, .screen-tag {
   position: absolute;
-  top: 10px; left: 14px;
   font-family: 'Space Mono', monospace;
-  font-size: 0.5rem;
-  color: rgba(255,208,0,0.4);
+  font-size: 0.52rem;
+  color: rgba(255,208,0,0.45);
   letter-spacing: 2px;
   z-index: 3;
 }
-.face {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  z-index: 1;
-}
+.oled-label { top: 12px; left: 14px; }
+.screen-tag { bottom: 12px; right: 14px; }
+.face { display: flex; flex-direction: column; align-items: center; gap: 18px; z-index: 1; }
 .eyes { display: flex; gap: 32px; }
 .eye {
   width: 44px; height: 44px;
@@ -236,20 +227,7 @@ h1 span { color: var(--yellow); }
   0%,100% { width:64px; border-radius:0 0 20px 20px; }
   40%,60% { width:80px; border-radius:20px; height:10px; }
 }
-.screen-tag {
-  position: absolute;
-  bottom: 10px; right: 14px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.5rem;
-  color: rgba(255,208,0,0.35);
-  letter-spacing: 2px;
-  z-index: 3;
-}
-.specs-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
+.specs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .spec {
   background: var(--darker);
   border: 1px solid var(--border);
@@ -257,183 +235,91 @@ h1 span { color: var(--yellow); }
   padding: 16px;
   text-align: center;
 }
-.spec-val {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  color: var(--yellow);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.spec-lbl {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-section { padding: 120px 0; }
+.spec-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--yellow); line-height: 1; margin-bottom: 4px; }
+.spec-lbl { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+section { padding: 115px 0; }
 .container { width: 90%; max-width: 1400px; margin: auto; }
-.sec-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 16px;
-  display: block;
-}
-.sec-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  letter-spacing: 2px;
-  line-height: 1;
-}
-.sec-sub { color: var(--muted); margin-top: 14px; font-size: 1rem; }
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 60px;
-}
+.sec-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; display: block; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 2px; line-height: 1; }
+.sec-sub { color: var(--muted); margin-top: 14px; font-size: 1rem; line-height: 1.7; max-width: 760px; }
+.divider { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
 .divider-line { flex: 1; height: 1px; background: var(--border); }
-.divider-text {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-}
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.about-text p { color: #999; line-height: 1.9; margin-bottom: 22px; font-size: 1.05rem; }
-.highlight-box {
-  border-left: 3px solid var(--yellow);
-  padding-left: 24px;
-  margin: 32px 0;
-}
+.divider-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 4px; text-transform: uppercase; white-space: nowrap; }
+.about-grid, .sustain-grid, .tech-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+.about-text p, .sustain-card p, .timeline-card p, .problem-card p { color: #999; line-height: 1.9; margin-bottom: 18px; font-size: 1.02rem; }
+.highlight-box { border-left: 3px solid var(--yellow); padding-left: 24px; margin: 32px 0; }
 .highlight-box p { color: var(--text) !important; font-size: 1.1rem !important; font-style: italic; }
 .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.data-block {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px 20px;
-  text-align: center;
-  transition: border-color 0.3s, transform 0.3s;
-}
+.data-block { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 20px; text-align: center; transition: border-color 0.3s, transform 0.3s; }
 .data-block:hover { border-color: var(--yellow); transform: translateY(-4px); }
 .data-block:first-child { grid-column: 1/-1; }
-.data-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
-.data-desc { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.data-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.3rem; color: var(--yellow); line-height: 1; margin-bottom: 6px; }
+.data-desc { font-family: 'Space Mono', monospace; font-size: 0.64rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
 .features-bg { background: #0a0a0a; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.feat-card {
+.cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.card {
   background: var(--darker);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 36px 28px;
+  padding: 34px 28px;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  min-height: 250px;
 }
-.feat-card::before {
-  content: '';
-  position: absolute;
-  bottom: -30px; right: -30px;
-  width: 100px; height: 100px;
-  background: radial-gradient(circle, rgba(255,208,0,0.06), transparent 70%);
-  border-radius: 50%;
-  transition: all 0.4s;
-}
-.feat-card:hover { border-color: rgba(255,208,0,0.4); transform: translateY(-6px); }
-.feat-card:hover::before { transform: scale(2.5); }
-.feat-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(255,208,0,0.07); line-height: 1; position: absolute; top: 10px; right: 18px; }
-.feat-icon { font-size: 2.2rem; margin-bottom: 20px; }
-.feat-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 12px; color: white; }
-.feat-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
-.tech-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start; }
+.card::before { content: ''; position: absolute; bottom: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,208,0,0.07), transparent 70%); border-radius: 50%; transition: all 0.4s; }
+.card:hover { border-color: rgba(255,208,0,0.42); transform: translateY(-6px); }
+.card:hover::before { transform: scale(2.8); }
+.card-num { font-family: 'Bebas Neue', sans-serif; font-size: 4.6rem; color: rgba(255,208,0,0.08); line-height: 1; position: absolute; top: 10px; right: 18px; }
+.card-icon { font-size: 2.1rem; margin-bottom: 20px; }
+.card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 2px; margin-bottom: 12px; color: var(--white); }
+.card p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+.requirements-table { margin-top: 40px; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: var(--card); }
+.req-row { display: grid; grid-template-columns: 1fr 1.4fr; border-bottom: 1px solid var(--border); }
+.req-row:last-child { border-bottom: 0; }
+.req-cell { padding: 22px 26px; color: #aaa; line-height: 1.7; }
+.req-cell:first-child { font-family:'Space Mono', monospace; color: var(--yellow); font-size: .78rem; text-transform: uppercase; letter-spacing: 1px; border-right: 1px solid var(--border); }
+.tech-layout { grid-template-columns: 0.8fr 1.2fr; }
 .tech-sidebar { position: sticky; top: 100px; }
-.tech-big { font-family: 'Bebas Neue', sans-serif; font-size: 6rem; line-height: 0.85; color: rgba(255,208,0,0.15); letter-spacing: 4px; margin-bottom: 30px; }
+.tech-big { font-family: 'Bebas Neue', sans-serif; font-size: 5.5rem; line-height: 0.85; color: rgba(255,208,0,0.15); letter-spacing: 4px; margin-bottom: 30px; }
 .tech-desc { color: var(--muted); line-height: 1.8; }
 .tech-list { display: flex; flex-direction: column; gap: 14px; }
-.tech-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px 26px;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  transition: all 0.3s;
-}
+.tech-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 26px; display: flex; align-items: flex-start; gap: 20px; transition: all 0.3s; }
 .tech-item:hover { border-color: rgba(255,208,0,0.3); }
 .tech-dot { width: 10px; height: 10px; background: var(--yellow); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .tech-name { font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--yellow); letter-spacing: 1px; margin-bottom: 6px; }
-.tech-exp { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
-.chip {
-  display: inline-block;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 4px;
-  margin-left: 10px;
-  vertical-align: middle;
-}
+.tech-exp { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+.chip { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-left: 10px; vertical-align: middle; }
 .chip-hw { background: rgba(255,208,0,0.12); color: var(--yellow); border: 1px solid rgba(255,208,0,0.3); }
-.chip-sw { background: rgba(0,200,100,0.1); color: #00c864; border: 1px solid rgba(0,200,100,0.25); }
-.chip-fab { background: rgba(100,150,255,0.1); color: #6496ff; border: 1px solid rgba(100,150,255,0.25); }
+.chip-sw { background: rgba(0,255,102,0.1); color: var(--green); border: 1px solid rgba(0,255,102,0.25); }
+.chip-fab { background: rgba(79,140,255,0.1); color: var(--blue); border: 1px solid rgba(79,140,255,0.25); }
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.timeline-card, .sustain-card, .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+.timeline-date { font-family: 'Space Mono', monospace; color: var(--yellow); letter-spacing: 2px; font-size: .75rem; margin-bottom: 12px; }
+.timeline-card h3, .sustain-card h3, .problem-card h3 { font-family:'Bebas Neue', sans-serif; letter-spacing:2px; font-size:1.8rem; margin-bottom:12px; }
+.problem-card { border-color: rgba(255,85,0,.35); background: linear-gradient(135deg, rgba(255,85,0,.08), rgba(15,15,15,1)); }
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.member-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 44px 32px;
-  text-align: center;
-  transition: all 0.4s;
-  position: relative;
-  overflow: hidden;
-}
-.member-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--yellow);
-  transform: scaleX(0);
-  transition: transform 0.4s;
-}
+.member-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 44px 32px; text-align: center; transition: all 0.4s; position: relative; overflow: hidden; }
+.member-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--yellow); transform: scaleX(0); transition: transform 0.4s; }
 .member-card:hover { transform: translateY(-8px); border-color: rgba(255,208,0,0.2); }
 .member-card:hover::after { transform: scaleX(1); }
-.avatar {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: #000;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.2rem;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 24px;
-  letter-spacing: 2px;
-}
+.avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--yellow); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; letter-spacing: 2px; }
 .member-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 8px; }
 .member-role { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--yellow); }
 footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: center; }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 6px; color: var(--yellow); margin-bottom: 10px; }
 .footer-sub { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
-
+@media(max-width: 1050px) { .cards-grid, .timeline { grid-template-columns: 1fr 1fr; } }
 @media(max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display:none; }
-  .hero-inner, .about-grid, .tech-layout { grid-template-columns: 1fr; gap: 40px; }
-  .features-grid { grid-template-columns: 1fr 1fr; }
-  .team-grid { grid-template-columns: 1fr; }
+  .hero-inner, .about-grid, .sustain-grid, .tech-layout { grid-template-columns: 1fr; gap: 40px; }
+  .cards-grid, .timeline, .team-grid { grid-template-columns: 1fr; }
   .about-visual .data-block:first-child { grid-column: auto; }
+  .specs-row { grid-template-columns: 1fr; }
+  .req-row { grid-template-columns: 1fr; }
+  .req-cell:first-child { border-right: 0; border-bottom: 1px solid var(--border); }
+  .tech-sidebar { position: static; }
 }
 </style>
 </head>
@@ -442,9 +328,11 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
 <nav>
   <div class="nav-logo">TANKY</div>
   <div class="nav-links">
-    <a href="#about">Le Projet</a>
+    <a href="#about">Projet</a>
+    <a href="#cdc">Cahier</a>
     <a href="#features">Fonctions</a>
     <a href="#tech">Tech</a>
+    <a href="#fabrication">Fabrication</a>
     <a href="#team">Équipe</a>
   </div>
 </nav>
@@ -454,30 +342,27 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
   <div class="grid-lines"></div>
   <div class="hero-inner">
     <div>
-      <div class="tag"><div class="live-dot"></div>Projet Final STI2D — 2026</div>
+      <div class="tag"><div class="live-dot"></div>Projet final 1STI2D3 — 2026</div>
       <h1>TANKY<br><span>LE TANK</span></h1>
-      <p class="hero-desc">Robot sumo conçu en 36 heures. ESP32, MicroPython, écran OLED et connexion WiFi — Tanky est vivant et affiche ses émotions.</p>
+      <p class="hero-desc">Robot à pattes piloté à distance, inspiré d’un tank mais sans roues ni chenilles fonctionnelles. Objectif : avancer autour de 1 m/s, communiquer en Wi-Fi et réunir innovation technologique, ingénierie et développement durable.</p>
       <div class="hero-ctas">
         <a href="#about" class="btn-y">Découvrir →</a>
-        <a href="#tech" class="btn-o">Technologies</a>
+        <a href="#cdc" class="btn-o">Voir le cahier des charges</a>
       </div>
     </div>
     <div class="robot-card">
       <div class="robot-screen">
-        <div class="oled-label">OLED 128×64</div>
+        <div class="oled-label">OLED · VISAGE TANKY</div>
         <div class="face">
-          <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-          </div>
+          <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
           <div class="mouth"></div>
         </div>
-        <div class="screen-tag">TANKY OS · ESP32</div>
+        <div class="screen-tag">PICO W · WIFI · H-BRIDGE</div>
       </div>
       <div class="specs-row">
-        <div class="spec"><div class="spec-val">2</div><div class="spec-lbl">Moteurs DC</div></div>
-        <div class="spec"><div class="spec-val">3</div><div class="spec-lbl">Moteur et ServoMoteur</div></div>
-        <div class="spec"><div class="spec-val">36H</div><div class="spec-lbl">Fabrication</div></div>
+        <div class="spec"><div class="spec-val">1 m/s</div><div class="spec-lbl">Objectif vitesse</div></div>
+        <div class="spec"><div class="spec-val">1:8</div><div class="spec-lbl">Réduction visée</div></div>
+        <div class="spec"><div class="spec-val">36H</div><div class="spec-lbl">Conception</div></div>
       </div>
     </div>
   </div>
@@ -489,149 +374,125 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
     <div class="about-grid">
       <div class="about-text">
         <span class="sec-label">Le Projet</span>
-        <h2 class="sec-title">UN ROBOT<br>CONÇU POUR<br>GAGNER</h2>
-        <div class="highlight-box">
-          <p>36 heures de conception, de programmation et d'assemblage pour créer un robot sumo.</p>
-        </div>
-        <p>Tanky est un robot sumo conçu dans le cadre du projet final de première STI2D. L'objectif : concevoir un robot capable de se deplacer uniquement avec des pattes, oui oui des pattes sur un tank.</p>
-        <p>Piloté par un ESP32 programmé en MicroPython, Tanky embarque un écran OLED pour afficher ses expressions, deux moteurs DC contrôlés via un pont en H, un servomoteur pour la tourelle, et une connexion WiFi pour la connexion a la manette de jeu.</p>
+        <h2 class="sec-title">UN TANK<br>QUI MARCHE</h2>
+        <div class="highlight-box"><p>La contrainte principale : créer un robot capable de se déplacer sans roues, tout en gardant l’apparence d’un tank.</p></div>
+        <p>Tanky est un robot réalisé en groupe de trois dans le cadre du projet final de 1re STI2D. Il devait être capable de se déplacer, d’être piloté à distance et d’intégrer une démarche de développement durable.</p>
+        <p>L’idée finale vient d’un compromis : après avoir envisagé une grenouille Dendrobates azureus, trop complexe à modéliser, l’équipe a choisi une forme de tank plus simple à concevoir sur CAO, puis a remplacé les chenilles fonctionnelles par un mécanisme de pattes.</p>
       </div>
       <div class="about-visual">
-        <div class="data-block"><div class="data-num">36H</div><div class="data-desc">Durée totale du projet</div></div>
-        <div class="data-block"><div class="data-num">100%</div><div class="data-desc">Cree par nous meme</div></div>
-        <div class="data-block"><div class="data-num">WiFi</div><div class="data-desc">Connexion manette</div></div>
-        <div class="data-block"><div class="data-num">3D et CAO</div><div class="data-desc">Impression pièces</div></div>
+        <div class="data-block"><div class="data-num">15×10×10</div><div class="data-desc">Dimensions prévues en cm</div></div>
+        <div class="data-block"><div class="data-num">8</div><div class="data-desc">Pattes inspirées robot araignée</div></div>
+        <div class="data-block"><div class="data-num">Wi-Fi</div><div class="data-desc">Pilotage à distance</div></div>
+        <div class="data-block"><div class="data-num">PLA</div><div class="data-desc">Pièces imprimées en 3D</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="features-bg" id="features">
+<section class="features-bg" id="cdc">
   <div class="container">
-    <div class="divider"><div class="divider-line"></div><div class="divider-text">02 — Fonctionnalités</div><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">02 — Cahier des charges</div><div class="divider-line"></div></div>
+    <span class="sec-label">Contraintes et solutions</span>
+    <h2 class="sec-title">CE QUE TANKY DEVAIT RESPECTER</h2>
+    <p class="sec-sub">Le robot devait marcher, être contrôlable à distance et atteindre une vitesse proche de 1 m/s grâce à une réduction mécanique.</p>
+    <div class="requirements-table">
+      <div class="req-row"><div class="req-cell">Déplacement sans roues</div><div class="req-cell">Utiliser des pattes, inspirées du mécanisme d’un robot araignée, pour conserver le déplacement imposé sans chenilles fonctionnelles.</div></div>
+      <div class="req-row"><div class="req-cell">Pilotage à distance</div><div class="req-cell">Communication Wi-Fi entre une manette et le robot pour envoyer les ordres : avancer, reculer, tourner et contrôler la tourelle.</div></div>
+      <div class="req-row"><div class="req-cell">Vitesse définie</div><div class="req-cell">Avec un moteur trop rapide à 9 V, l’équipe vise une réduction 1:8 pour passer d’environ 7,77 m/s à environ 0,97 m/s, donc proche de 1 m/s.</div></div>
+      <div class="req-row"><div class="req-cell">Développement durable</div><div class="req-cell">Privilégier des pièces en PLA imprimées en 3D, limiter les coûts et rendre le projet compréhensible et motivant pour d’autres élèves.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">03 — Fonctions</div><div class="divider-line"></div></div>
     <div style="margin-bottom:60px">
-      <span class="sec-label">Ce que Tanky sait faire</span>
-      <h2 class="sec-title">CAPACITÉS</h2>
+      <span class="sec-label">Ce que Tanky embarque</span>
+      <h2 class="sec-title">FONCTIONNALITÉS</h2>
     </div>
-    <div class="features-grid">
-      <div class="feat-card">
-        <div class="feat-num">01</div>
-        <div class="feat-icon">📡</div>
-        <h3>Se deplacer</h3>
-        <p>Evidemment c'est la base du projet.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-num">02</div>
-        <div class="feat-icon">⚙️</div>
-        <h3>Mobilité</h3>
-        <p>Deux moteurs DC pilotés par un pont en H pour un mouvement controllable par la manette.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-num">03</div>
-        <div class="feat-icon">😄</div>
-        <h3>Expressions</h3>
-        <p>Écran OLED 128×64 affichant les émotions animées de Tanky selon le contexte : attaque, victoire, alerte…</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-num">04</div>
-        <div class="feat-icon">📶</div>
-        <h3>WiFi</h3>
-        <p>Connexion sans fil à la manette via le WiFi intégré de l'ESP32 pour le pilotage manuel a distance.</p>
-      </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-num">01</div><div class="card-icon">🦿</div><h3>Marche par pattes</h3><p>Le robot garde l’apparence d’un tank, mais le déplacement est assuré par des pattes pour respecter l’interdiction des roues.</p></div>
+      <div class="card"><div class="card-num">02</div><div class="card-icon">📶</div><h3>Wi-Fi</h3><p>La manette communique avec Tanky en Wi-Fi pour un pilotage simple depuis le contrôleur réalisé avec un M5Stick C Plus 2.</p></div>
+      <div class="card"><div class="card-num">03</div><div class="card-icon"⚙️</div><h3>Pont en H</h3><p>Le pont en H inverse le sens du courant dans les moteurs afin de gérer l’avance, le recul et la rotation.</p></div>
+      <div class="card"><div class="card-num">04</div><div class="card-icon">👁️</div><h3>Visage OLED</h3><p>Un écran OLED donne vie au robot avec des expressions, complétées par un buzzer pour les informations de connexion.</p></div>
     </div>
   </div>
 </section>
 
-<section id="tech">
+<section class="features-bg" id="tech">
   <div class="container">
-    <div class="divider"><div class="divider-line"></div><div class="divider-text">03 — Technologies</div><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">04 — Technologies</div><div class="divider-line"></div></div>
     <div class="tech-layout">
       <div class="tech-sidebar">
         <div class="tech-big">TECH<br>STACK</div>
-        <p class="tech-desc">Un ensemble de composants matériels et logiciels soigneusement choisis pour maximiser les performances de Tanky.</p>
+        <p class="tech-desc">La page a été recalée sur le matériel réellement décrit dans le compte-rendu : manette ESP32/M5Stick, robot Raspberry Pi Pico W, pont en H, servo, OLED, buzzer et pièces imprimées en PLA.</p>
       </div>
       <div class="tech-list">
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">ESP32 <span class="chip chip-hw">Matériel</span></div>
-            <div class="tech-exp">Microcontrôleur principal avec WiFi et Bluetooth intégrés. Gère les capteurs, les moteurs, l'écran OLED et la connexion réseau — le tout en temps réel.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">MicroPython <span class="chip chip-sw">Logiciel</span></div>
-            <div class="tech-exp">Langage de programmation embarqué sur l'ESP32. Il gere toute la logique de Tanky.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">Pont en H (L298N) <span class="chip chip-hw">Matériel</span></div>
-            <div class="tech-exp">Driver moteur permettant de contrôler la vitesse et le sens de rotation des deux moteurs DC indépendamment, via les sorties PWM de l'ESP32.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">Moteurs DC <span class="chip chip-hw">Matériel</span></div>
-            <div class="tech-exp">Deux moteurs à courant continu à couple élevé pour une propulsion rapide et des rotations sur place indispensables au combat sumo.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">Écran OLED 128×64 <span class="chip chip-hw">Matériel</span></div>
-            <div class="tech-exp">Afficheur OLED communiquant via I2C. Diffuse en temps réel les expressions animées de Tanky : yeux, bouche, réactions au combat.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">WiFi <span class="chip chip-hw">Matériel</span></div>
-            <div class="tech-exp">Connexion sans fil intégrée à l'ESP32. Permet la communication avec la manette pour le pilotage.</div>
-          </div>
-        </div>
-        <div class="tech-item">
-          <div class="tech-dot"></div>
-          <div>
-            <div class="tech-name">Impression 3D & CAO <span class="chip chip-fab">Fabrication</span></div>
-            <div class="tech-exp">Pièces mécaniques conçues sur logiciel CAO et imprimées sur mesure : supports moteurs, châssis, fixations capteurs — pour un assemblage précis et solide.</div>
-          </div>
-        </div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">M5Stick C Plus 2 / ESP32 <span class="chip chip-hw">Manette</span></div><div class="tech-exp">Module utilisé comme base de la manette : écran, boutons, batterie, buzzer et ajout d’un module joystick.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">Raspberry Pi Pico W <span class="chip chip-hw">Robot</span></div><div class="tech-exp">Cœur de Tanky : microcontrôleur avec Wi-Fi intégré et ports disponibles pour piloter les composants.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">Pont en H <span class="chip chip-hw">Puissance</span></div><div class="tech-exp">Permet d’inverser le sens de rotation des moteurs DC en inversant le sens du courant envoyé.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">Moteurs DC + réduction <span class="chip chip-hw">Mobilité</span></div><div class="tech-exp">Moteurs associés à une réduction mécanique 1:8 pour rapprocher la vitesse réelle de l’objectif fixé.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">Servomoteur <span class="chip chip-hw">Tourelle</span></div><div class="tech-exp">Ajouté pour animer ou orienter la tourelle, afin de renforcer l’identité visuelle du tank.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">OLED + Buzzer <span class="chip chip-sw">Interaction</span></div><div class="tech-exp">L’écran affiche les expressions de Tanky et le buzzer donne des retours sonores, notamment lors de la connexion.</div></div></div>
+        <div class="tech-item"><div class="tech-dot"></div><div><div class="tech-name">Fusion 360 + Impression 3D <span class="chip chip-fab">Fabrication</span></div><div class="tech-exp">Modélisation des pièces, puis impression du châssis, des côtés, du toit, de la tourelle et des éléments de chenilles décoratives.</div></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="fabrication">
+  <div class="container">
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">05 — Fabrication</div><div class="divider-line"></div></div>
+    <span class="sec-label">De l’idée au prototype</span>
+    <h2 class="sec-title">CONCEPTION, IMPRESSION, ASSEMBLAGE</h2>
+    <p class="sec-sub">Les pièces ont été conçues en CAO puis imprimées en 3D. L’assemblage final a nécessité de la colle, car les encoches prévues étaient trop petites et ont cédé.</p>
+    <div class="timeline" style="margin-top:50px">
+      <div class="timeline-card"><div class="timeline-date">ÉTAPE 01</div><h3>Recherche d’idées</h3><p>Départ depuis un robot araignée, puis réflexion autour d’une grenouille avant de choisir un tank plus simple à modéliser.</p></div>
+      <div class="timeline-card"><div class="timeline-date">ÉTAPE 02</div><h3>Modélisation</h3><p>Création d’un tank compact de 15 cm de long, 10 cm de large et 10 cm de haut, avec une forme adaptée à l’impression 3D.</p></div>
+      <div class="timeline-card"><div class="timeline-date">ÉTAPE 03</div><h3>Assemblage</h3><p>Impression du toit, des côtés, de la tourelle et des chenilles décoratives, puis collage des pièces pour obtenir le prototype final.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="features-bg" id="durable">
+  <div class="container">
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">06 — Développement durable</div><div class="divider-line"></div></div>
+    <div class="sustain-grid">
+      <div>
+        <span class="sec-label">Démarche I2D</span>
+        <h2 class="sec-title">ÉCOLOGIQUE, SOCIAL, ÉCONOMIQUE</h2>
+        <p class="sec-sub">Le projet met en avant une démarche de développement durable à travers le choix du PLA, le faible coût des composants et la dimension pédagogique du robot.</p>
+      </div>
+      <div class="sustain-card"><h3>Pourquoi c’est durable ?</h3><p><strong>Écologie :</strong> utilisation de PLA, un matériau d’impression 3D issu de ressources végétales comme l’amidon de maïs.</p><p><strong>Économie :</strong> composants accessibles, simples à remplacer et adaptés à un projet scolaire.</p><p><strong>Social :</strong> projet attractif pour découvrir la mécanique, l’électronique, la programmation et les métiers techniques.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="bilan">
+  <div class="container">
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">07 — Bilan</div><div class="divider-line"></div></div>
+    <div class="problem-card">
+      <span class="sec-label">Conclusion du projet</span>
+      <h2 class="sec-title">UN CODE FONCTIONNEL, MAIS UN BLOCAGE ÉLECTRIQUE</h2>
+      <p>La communication entre la manette et Tanky fonctionne correctement, même à plus de 10 mètres. La partie logicielle est donc validée.</p>
+      <p>Le principal problème rencontré concerne l’installation électrique du pont en H. Malgré plusieurs remplacements et l’aide du professeur, le problème n’a pas été résolu à temps. Le pont en H étant essentiel pour synchroniser les deux moteurs, l’équipe n’a pas pu changer de solution en fin de projet.</p>
     </div>
   </div>
 </section>
 
 <section id="team">
   <div class="container">
-    <div class="divider"><div class="divider-line"></div><div class="divider-text">04 — Équipe</div><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">08 — Équipe</div><div class="divider-line"></div></div>
     <div style="margin-bottom:60px">
       <span class="sec-label">Derrière Tanky</span>
       <h2 class="sec-title">L'ÉQUIPE</h2>
-      <p class="sec-sub">Trois étudiants STI2D, 36 heures, un seul objectif.</p>
+      <p class="sec-sub">Trois élèves de 1STI2D3 autour d’un projet mêlant mécanique, électronique, programmation et fabrication.</p>
     </div>
     <div class="team-grid">
-      <div class="member-card">
-        <div class="avatar">WG</div>
-        <div class="member-name">Warren Goguet</div>
-        <div class="member-role">Chef de Projet</div>
-      </div>
-      <div class="member-card">
-        <div class="avatar">CL</div>
-        <div class="member-name">Camille Lebas</div>
-        <div class="member-role">Conception 3D</div>
-      </div>
-      <div class="member-card">
-        <div class="avatar">E</div>
-        <div class="member-name">Elias</div>
-        <div class="member-role">Conception Mécanique</div>
-      </div>
+      <div class="member-card"><div class="avatar">WG</div><div class="member-name">Warren Goguet</div><div class="member-role">Programmation & intégration</div></div>
+      <div class="member-card"><div class="avatar">CL</div><div class="member-name">Camille Lebas</div><div class="member-role">Conception & fabrication</div></div>
+      <div class="member-card"><div class="avatar">E</div><div class="member-name">Elias</div><div class="member-role">Mécanique & assemblage</div></div>
     </div>
   </div>
 </section>
@@ -639,7 +500,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
 <footer>
   <div class="container">
     <div class="footer-logo">TANKY</div>
-    <p class="footer-sub">Projet Final STI2D — 2026 — Warren · Camille · Elias</p>
+    <p class="footer-sub">Projet final STI2D — 2026 — Warren · Camille · Elias</p>
   </div>
 </footer>
 

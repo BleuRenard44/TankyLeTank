@@ -309,12 +309,31 @@ section { padding: 115px 0; }
 footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: center; }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 6px; color: var(--yellow); margin-bottom: 10px; }
 .footer-sub { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
-@media(max-width: 1050px) { .cards-grid, .timeline { grid-template-columns: 1fr 1fr; } }
+
+.video-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: stretch; margin-top: 50px; }
+.video-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: all .3s; position: relative; }
+.video-card:hover { border-color: rgba(255,208,0,.35); transform: translateY(-4px); }
+.video-frame { aspect-ratio: 16 / 9; background: radial-gradient(circle at center, rgba(255,208,0,.12), rgba(0,0,0,1) 68%); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid var(--border); }
+.video-frame iframe, .video-frame video { width: 100%; height: 100%; border: 0; display: block; background: #000; }
+.video-placeholder { width: 84px; height: 84px; border-radius: 50%; background: var(--yellow); color: #000; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 0 40px rgba(255,208,0,.35); }
+.video-content { padding: 28px; }
+.video-content h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 2rem; margin-bottom: 10px; color: var(--white); }
+.video-content p { color: var(--muted); line-height: 1.75; font-size: .95rem; }
+.video-list { display: grid; gap: 18px; }
+.video-mini { display: grid; grid-template-columns: 150px 1fr; min-height: 135px; }
+.video-mini .video-frame { aspect-ratio: auto; min-height: 135px; border-bottom: 0; border-right: 1px solid var(--border); }
+.video-mini .video-placeholder { width: 54px; height: 54px; font-size: 1.25rem; }
+.video-note { margin-top: 34px; border-left: 3px solid var(--yellow); padding: 18px 0 18px 24px; color: #aaa; line-height: 1.8; }
+.video-note code { color: var(--yellow); background: rgba(255,208,0,.08); padding: 2px 6px; border-radius: 4px; }
+
+@media(max-width: 1050px) { .cards-grid, .timeline, .video-grid { grid-template-columns: 1fr; } }
 @media(max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display:none; }
   .hero-inner, .about-grid, .sustain-grid, .tech-layout { grid-template-columns: 1fr; gap: 40px; }
-  .cards-grid, .timeline, .team-grid { grid-template-columns: 1fr; }
+  .cards-grid, .timeline, .team-grid, .video-grid { grid-template-columns: 1fr; }
+  .video-mini { grid-template-columns: 1fr; }
+  .video-mini .video-frame { border-right: 0; border-bottom: 1px solid var(--border); aspect-ratio: 16 / 9; }
   .about-visual .data-block:first-child { grid-column: auto; }
   .specs-row { grid-template-columns: 1fr; }
   .req-row { grid-template-columns: 1fr; }
@@ -333,6 +352,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
     <a href="#features">Fonctions</a>
     <a href="#tech">Tech</a>
     <a href="#fabrication">Fabrication</a>
+    <a href="#videos">Vidéos</a>
     <a href="#team">Équipe</a>
   </div>
 </nav>
@@ -348,6 +368,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
       <div class="hero-ctas">
         <a href="#about" class="btn-y">Découvrir →</a>
         <a href="#cdc" class="btn-o">Voir le cahier des charges</a>
+        <a href="#videos" class="btn-o">Vidéos</a>
       </div>
     </div>
     <div class="robot-card">
@@ -414,7 +435,7 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
     <div class="cards-grid">
       <div class="card"><div class="card-num">01</div><div class="card-icon">🦿</div><h3>Marche par pattes</h3><p>Le robot garde l’apparence d’un tank, mais le déplacement est assuré par des pattes pour respecter l’interdiction des roues.</p></div>
       <div class="card"><div class="card-num">02</div><div class="card-icon">📶</div><h3>Wi-Fi</h3><p>La manette communique avec Tanky en Wi-Fi pour un pilotage simple depuis le contrôleur réalisé avec un M5Stick C Plus 2.</p></div>
-      <div class="card"><div class="card-num">03</div><div class="card-icon"⚙️</div><h3>Pont en H</h3><p>Le pont en H inverse le sens du courant dans les moteurs afin de gérer l’avance, le recul et la rotation.</p></div>
+      <div class="card"><div class="card-num">03</div><div class="card-icon">⚙️</div><h3>Pont en H</h3><p>Le pont en H inverse le sens du courant dans les moteurs afin de gérer l’avance, le recul et la rotation.</p></div>
       <div class="card"><div class="card-num">04</div><div class="card-icon">👁️</div><h3>Visage OLED</h3><p>Un écran OLED donne vie au robot avec des expressions, complétées par un buzzer pour les informations de connexion.</p></div>
     </div>
   </div>
@@ -481,9 +502,62 @@ footer { border-top: 1px solid var(--border); padding: 50px 0; text-align: cente
   </div>
 </section>
 
+
+<section class="features-bg" id="videos">
+  <div class="container">
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">08 — Vidéos</div><div class="divider-line"></div></div>
+    <span class="sec-label">Démonstrations et étapes</span>
+    <h2 class="sec-title">PAGE VIDÉOS</h2>
+    <p class="sec-sub">Cette page regroupe les vidéos importantes du projet : présentation de Tanky, test de connexion, déplacement, fabrication et assemblage final.</p>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-frame">
+          <!-- Remplace la ligne ci-dessous par ta vraie vidéo :
+          <video controls src="videos/demo-tanky.mp4"></video>
+          ou par un lien YouTube :
+          <iframe src="https://www.youtube.com/embed/ID_DE_LA_VIDEO" title="Démonstration Tanky" allowfullscreen></iframe>
+          -->
+          <div class="video-placeholder">▶</div>
+        </div>
+        <div class="video-content">
+          <h3>Démonstration principale</h3>
+          <p>Vidéo de présentation du robot Tanky : contrôle à distance, réactions du robot, communication Wi-Fi et comportement général du prototype.</p>
+        </div>
+      </div>
+
+      <div class="video-list">
+        <div class="video-card video-mini">
+          <div class="video-frame"><div class="video-placeholder">▶</div></div>
+          <div class="video-content">
+            <h3>Connexion Wi-Fi</h3>
+            <p>Test entre la manette M5Stick C Plus 2 et le Raspberry Pi Pico W de Tanky.</p>
+          </div>
+        </div>
+        <div class="video-card video-mini">
+          <div class="video-frame"><div class="video-placeholder">▶</div></div>
+          <div class="video-content">
+            <h3>Fabrication</h3>
+            <p>Impression 3D, pièces PLA, assemblage du châssis, du toit, des côtés et de la tourelle.</p>
+          </div>
+        </div>
+        <div class="video-card video-mini">
+          <div class="video-frame"><div class="video-placeholder">▶</div></div>
+          <div class="video-content">
+            <h3>Tests moteurs</h3>
+            <p>Essais autour du pont en H, des moteurs DC et du sens de rotation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="video-note">Pour ajouter une vraie vidéo locale, crée un dossier <code>videos</code> à côté du fichier HTML, ajoute ta vidéo dedans, puis remplace le placeholder par <code>&lt;video controls src="videos/nom-video.mp4"&gt;&lt;/video&gt;</code>.</p>
+  </div>
+</section>
+
 <section id="team">
   <div class="container">
-    <div class="divider"><div class="divider-line"></div><div class="divider-text">08 — Équipe</div><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-text">09 — Équipe</div><div class="divider-line"></div></div>
     <div style="margin-bottom:60px">
       <span class="sec-label">Derrière Tanky</span>
       <h2 class="sec-title">L'ÉQUIPE</h2>
